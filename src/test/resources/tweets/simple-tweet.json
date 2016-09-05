@@ -1,0 +1,254 @@
+{ 
+    "created_at": "Mon Sep 05 12:14:41 +0000 2016", 
+    "id": 772769923064094700, 
+    "id_str": "772769923064094720", 
+    "text": "RT @euregjug: Meldet euch zum Vortrag am 14.9 an https://t.co/ADKBqUT9dU Ihr könnt eine @jetbrains Lizenz und Bücher aus dem @dpunkt_verlag…", 
+    "truncated": false, 
+    "entities": { 
+        "hashtags": [], 
+        "symbols": [], 
+        "user_mentions": [ 
+            { 
+                "screen_name": "euregjug", 
+                "name": "EuregJUG Maas-Rhine", 
+                "id": 3097184062, 
+                "id_str": "3097184062", 
+                "indices": [ 
+                    3, 
+                    12 
+                ] 
+            }, 
+            { 
+                "screen_name": "jetbrains", 
+                "name": "JetBrains", 
+                "id": 14146389, 
+                "id_str": "14146389", 
+                "indices": [ 
+                    88, 
+                    98 
+                ] 
+            }, 
+            { 
+                "screen_name": "dpunkt_verlag", 
+                "name": "dpunkt.verlag GmbH", 
+                "id": 88668773, 
+                "id_str": "88668773", 
+                "indices": [ 
+                    125, 
+                    139 
+                ] 
+            } 
+        ], 
+        "urls": [ 
+            { 
+                "url": "https://t.co/ADKBqUT9dU", 
+                "expanded_url": "http://www.euregjug.eu/register/9", 
+                "display_url": "euregjug.eu/register/9", 
+                "indices": [ 
+                    49, 
+                    72 
+                ] 
+            } 
+        ] 
+    }, 
+    "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>", 
+    "in_reply_to_status_id": null, 
+    "in_reply_to_status_id_str": null, 
+    "in_reply_to_user_id": null, 
+    "in_reply_to_user_id_str": null, 
+    "in_reply_to_screen_name": null, 
+    "user": { 
+        "id": 1863311, 
+        "id_str": "1863311", 
+        "name": "Michael Simons", 
+        "screen_name": "rotnroll666", 
+        "location": "Aachen", 
+        "description": "Father of two, Husband, Geek, Programmer, Biker. Tweets about coding, children. Curses some time. In English and German.", 
+        "url": "http://t.co/uzcOFlhfMX", 
+        "entities": { 
+            "url": { 
+                "urls": [ 
+                    { 
+                        "url": "http://t.co/uzcOFlhfMX", 
+                        "expanded_url": "http://michael-simons.eu", 
+                        "display_url": "michael-simons.eu", 
+                        "indices": [ 
+                            0, 
+                            22 
+                        ] 
+                    } 
+                ] 
+            }, 
+            "description": { 
+                "urls": [] 
+            } 
+        }, 
+        "protected": false, 
+        "followers_count": 837, 
+        "friends_count": 473, 
+        "listed_count": 92, 
+        "created_at": "Thu Mar 22 11:52:58 +0000 2007", 
+        "favourites_count": 18484, 
+        "utc_offset": 7200, 
+        "time_zone": "Berlin", 
+        "geo_enabled": true, 
+        "verified": false, 
+        "statuses_count": 35399, 
+        "lang": "de", 
+        "contributors_enabled": false, 
+        "is_translator": false, 
+        "is_translation_enabled": false, 
+        "profile_background_color": "131516", 
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme14/bg.gif", 
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme14/bg.gif", 
+        "profile_background_tile": true, 
+        "profile_image_url": "http://pbs.twimg.com/profile_images/720869982351937536/OeBOC4Fp_normal.jpg", 
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/720869982351937536/OeBOC4Fp_normal.jpg", 
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/1863311/1454360709", 
+        "profile_link_color": "009999", 
+        "profile_sidebar_border_color": "EEEEEE", 
+        "profile_sidebar_fill_color": "EFEFEF", 
+        "profile_text_color": "333333", 
+        "profile_use_background_image": true, 
+        "has_extended_profile": true, 
+        "default_profile": false, 
+        "default_profile_image": false, 
+        "following": true, 
+        "follow_request_sent": false, 
+        "notifications": false 
+    }, 
+    "geo": null, 
+    "coordinates": null, 
+    "place": null, 
+    "contributors": null, 
+    "retweeted_status": { 
+        "created_at": "Mon Sep 05 09:04:17 +0000 2016", 
+        "id": 772722007851106300, 
+        "id_str": "772722007851106305", 
+        "text": "Meldet euch zum Vortrag am 14.9 an https://t.co/ADKBqUT9dU Ihr könnt eine @jetbrains Lizenz und Bücher aus dem @dpunkt_verlag gewinnen…", 
+        "truncated": false, 
+        "entities": { 
+            "hashtags": [], 
+            "symbols": [], 
+            "user_mentions": [ 
+                { 
+                    "screen_name": "jetbrains", 
+                    "name": "JetBrains", 
+                    "id": 14146389, 
+                    "id_str": "14146389", 
+                    "indices": [ 
+                        74, 
+                        84 
+                    ] 
+                }, 
+                { 
+                    "screen_name": "dpunkt_verlag", 
+                    "name": "dpunkt.verlag GmbH", 
+                    "id": 88668773, 
+                    "id_str": "88668773", 
+                    "indices": [ 
+                        111, 
+                        125 
+                    ] 
+                } 
+            ], 
+            "urls": [ 
+                { 
+                    "url": "https://t.co/ADKBqUT9dU", 
+                    "expanded_url": "http://www.euregjug.eu/register/9", 
+                    "display_url": "euregjug.eu/register/9", 
+                    "indices": [ 
+                        35, 
+                        58 
+                    ] 
+                } 
+            ] 
+        }, 
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>", 
+        "in_reply_to_status_id": null, 
+        "in_reply_to_status_id_str": null, 
+        "in_reply_to_user_id": null, 
+        "in_reply_to_user_id_str": null, 
+        "in_reply_to_screen_name": null, 
+        "user": { 
+            "id": 3097184062, 
+            "id_str": "3097184062", 
+            "name": "EuregJUG Maas-Rhine", 
+            "screen_name": "euregjug", 
+            "location": "Aachen, Liege, Maastricht", 
+            "description": "Java User Group for the Euregio Maas-Rhine (Aachen, Liege, Maastricht)", 
+            "url": "http://t.co/BK7k6aS3ND", 
+            "entities": { 
+                "url": { 
+                    "urls": [ 
+                        { 
+                            "url": "http://t.co/BK7k6aS3ND", 
+                            "expanded_url": "http://www.euregjug.eu", 
+                            "display_url": "euregjug.eu", 
+                            "indices": [ 
+                                0, 
+                                22 
+                            ] 
+                        } 
+                    ] 
+                }, 
+                "description": { 
+                    "urls": [] 
+                } 
+            }, 
+            "protected": false, 
+            "followers_count": 133, 
+            "friends_count": 142, 
+            "listed_count": 10, 
+            "created_at": "Thu Mar 19 16:34:55 +0000 2015", 
+            "favourites_count": 100, 
+            "utc_offset": 7200, 
+            "time_zone": "Belgrade", 
+            "geo_enabled": false, 
+            "verified": false, 
+            "statuses_count": 281, 
+            "lang": "en", 
+            "contributors_enabled": false, 
+            "is_translator": false, 
+            "is_translation_enabled": false, 
+            "profile_background_color": "C0DEED", 
+            "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png", 
+            "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png", 
+            "profile_background_tile": false, 
+            "profile_image_url": "http://pbs.twimg.com/profile_images/588360549106393088/Ws89gpPR_normal.png", 
+            "profile_image_url_https": "https://pbs.twimg.com/profile_images/588360549106393088/Ws89gpPR_normal.png", 
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/3097184062/1429110890", 
+            "profile_link_color": "0084B4", 
+            "profile_sidebar_border_color": "C0DEED", 
+            "profile_sidebar_fill_color": "DDEEF6", 
+            "profile_text_color": "333333", 
+            "profile_use_background_image": true, 
+            "has_extended_profile": false, 
+            "default_profile": true, 
+            "default_profile_image": false, 
+            "following": false, 
+            "follow_request_sent": false, 
+            "notifications": false 
+        }, 
+        "geo": null, 
+        "coordinates": null, 
+        "place": null, 
+        "contributors": null, 
+        "is_quote_status": false, 
+        "retweet_count": 4, 
+        "favorite_count": 1, 
+        "favorited": false, 
+        "retweeted": false, 
+        "possibly_sensitive": false, 
+        "possibly_sensitive_appealable": false, 
+        "lang": "de" 
+    }, 
+    "is_quote_status": false, 
+    "retweet_count": 4, 
+    "favorite_count": 0, 
+    "favorited": false, 
+    "retweeted": false, 
+    "possibly_sensitive": false, 
+    "possibly_sensitive_appealable": false, 
+    "lang": "de" 
+}
