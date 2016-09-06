@@ -15,6 +15,9 @@
  */
 package ac.simons.tweetarchive.tweets;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import javax.persistence.Column;
@@ -91,6 +94,7 @@ import org.hibernate.validator.constraints.NotBlank;
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@JsonInclude(NON_EMPTY)
 public class TweetEntity implements Serializable {
 
     private static final long serialVersionUID = 5064886379919029239L;
@@ -120,7 +124,7 @@ public class TweetEntity implements Serializable {
          */
         @Column(name = "in_reply_to_screen_name")
         @NotNull
-        @Field(name = "replied_to", index = Index.YES, analyze = Analyze.NO, store = Store.YES)
+        @Field(name = "to", index = Index.YES, analyze = Analyze.NO, store = Store.YES)
         private String inReplyToScreenName;
 
         /**
@@ -182,12 +186,17 @@ public class TweetEntity implements Serializable {
     @NotNull
     private long twitterUserId;
 
+    @Column(name = "screen_name", nullable = false)
+    @NotNull
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.YES)
+    private String screenName;
+
     /**
      * UTC time when this Tweet was created.
      */
     @Column(name = "created_at", nullable = false)
     @NotNull
-    @Field(store = Store.YES, index = Index.YES, analyze = Analyze.NO)
+    @Field(name = "created_at", store = Store.YES, index = Index.YES, analyze = Analyze.NO)
     private ZonedDateTime createdAt;
 
     /**
@@ -213,6 +222,7 @@ public class TweetEntity implements Serializable {
      */
     @Column(name = "raw_data", nullable = false, columnDefinition = "jsonb")
     @NotBlank
+    @JsonIgnore
     private String rawData;
 
     /**
@@ -220,7 +230,7 @@ public class TweetEntity implements Serializable {
      */
     @Embedded
     @Setter
-    @IndexedEmbedded
+    @IndexedEmbedded(prefix = "reply.")
     private InReplyTo inReplyTo;
 
     /**
@@ -236,7 +246,7 @@ public class TweetEntity implements Serializable {
      */
     @Column(name = "country_code")
     @Setter
-    @Field(store = Store.YES, index = Index.YES, analyze = Analyze.NO, name = "country_code")
+    @Field(name = "country_code", store = Store.YES, index = Index.YES, analyze = Analyze.NO)
     private String countryCode;
 
     /**
@@ -256,9 +266,10 @@ public class TweetEntity implements Serializable {
     @Setter
     private Location location;
 
-    public TweetEntity(final long id, final long twitterUserId, final ZonedDateTime createdAt, final String content, final String source, final String rawData) {
+    public TweetEntity(final long id, final long twitterUserId, final String screenName, final ZonedDateTime createdAt, final String content, final String source, final String rawData) {
         this.id = id;
         this.twitterUserId = twitterUserId;
+        this.screenName = screenName;
         this.createdAt = createdAt;
         this.content = content;
         this.source = source;

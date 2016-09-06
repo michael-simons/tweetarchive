@@ -17,6 +17,7 @@
 create table tweets (
     id                      BIGINT PRIMARY KEY,
     twitter_user_id         BIGINT NOT NULL,
+    screen_name             VARCHAR(16),
     created_at              TIMESTAMP WITH TIME ZONE NOT NULL,
     content                 TEXT NOT NULL,
     source                  VARCHAR(128) NOT NULL,

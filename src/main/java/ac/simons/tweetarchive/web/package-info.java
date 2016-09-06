@@ -13,19 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ac.simons.tweetarchive.tweets;
-
-import java.util.Optional;
-import org.springframework.data.repository.Repository;
-
 /**
- * @author Michael J. Simons, 2016-09-05
+ * A web frontend and a small api to store an official Twitter archive.
+ * The stuff you'll find here isn't nice. I'll use jOOR Reflect to access private
+ * apis, brute force the JSON from the archive into the same format the official
+ * Twitter api uses and so on.
  */
-public interface TweetRepository extends Repository<TweetEntity, Long>, TweetRepositoryExt {
-
-    Optional<TweetEntity> findOne(final Long id);
-
-    TweetEntity save(final TweetEntity tweet);
-
-    long deleteById(final long id);
-}
+package ac.simons.tweetarchive.web;

@@ -48,9 +48,17 @@ public class TweetStorageService {
 
     @Transactional
     public TweetEntity store(final Status status, final String rawContent) {
+        final Optional<TweetEntity> existingTweet = this.tweetRepository.findOne(status.getId());
+        if (existingTweet.isPresent()) {
+            final TweetEntity rv = existingTweet.get();
+            log.warn("Tweet with status {} already existed...", rv.getId());
+            return rv;
+        }
+
         final TweetEntity tweet = new TweetEntity(
                 status.getId(),
                 status.getUser().getId(),
+                status.getUser().getScreenName(),
                 status.getCreatedAt().toInstant().atZone(ZoneId.of("UTC")),
                 extractContent(status),
                 extractSource(status),
@@ -67,7 +75,7 @@ public class TweetStorageService {
     }
 
     @Transactional
-     public void delete(final long id) {
+    public void delete(final long id) {
         long count = this.tweetRepository.deleteById(id);
         log.info("Deleted {} status...", count);
     }
