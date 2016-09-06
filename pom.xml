@@ -42,7 +42,7 @@
 
         <hibernate-search.version>5.5.4.Final</hibernate-search.version>
         <java.version>1.8</java.version>
-        <joor.version>0.9.6</joor.version>        
+        <joor.version>0.9.6</joor.version>
         <twitter4j.version>4.0.4</twitter4j.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -133,7 +133,7 @@
             <version>5.0.2</version>
         </dependency>
     </dependencies>
-    <build>        
+    <build>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -149,7 +149,7 @@
                     </dependencies>
                 </plugin>
             </plugins>
-        </pluginManagement>        
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -179,7 +179,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -198,6 +198,94 @@
                         <phase>validate</phase>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.15.16</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>postgres:9.5.4</name>
+                            <alias>tweetarchive-db</alias>
+                            <run>
+                                <volumes>
+                                    <bind>
+                                        <volume>${basedir}/var/db/prod:/var/lib/postgresql/data</volume>
+                                    </bind>
+                                </volumes>
+                                <env>
+                                    <POSTGRES_USER>tweetArchive</POSTGRES_USER>
+                                    <POSTGRES_PASSWORD>tweetArchive</POSTGRES_PASSWORD>
+                                </env>
+                                <wait>
+                                    <log>database system is ready to accept connections</log>
+                                    <time>60000</time>
+                                </wait>
+                            </run>
+                        </image>
+                        <image>
+                            <name>msimons/tweetarchive-app</name>
+                            <alias>tweetarchive-app</alias>
+                            <build>
+                                <from>java:8u102</from>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <volumes>
+                                    <volume>/tmp</volume>
+                                </volumes>
+                                <assembly>
+                                    <inline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                            xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+                                            xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+                                        <files>
+                                            <file>
+                                                <source>${project.build.directory}/${project.build.finalName}.jar</source>
+                                                <outputDirectory>.</outputDirectory>
+                                            </file>
+                                        </files>
+                                        <fileSets>
+                                            <fileSet>
+                                                <useDefaultExcludes>true</useDefaultExcludes>
+                                                <directory>${basedir}</directory>
+                                                <includes>
+                                                    <include>application.properties</include>
+                                                </includes>
+                                                <outputDirectory>.</outputDirectory>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inline>
+                                </assembly>
+                                <entryPoint>
+                                    <exec>
+                                        <args>java</args>
+                                        <args>-Dspring.profiles.active=prod</args>
+                                        <args>-jar</args>
+                                        <args>/maven/${project.build.finalName}.jar</args>
+                                        <args>--spring.config.location=/maven/application.properties</args>
+                                    </exec>
+                                </entryPoint>
+                            </build>
+                            <run>
+                                <links>
+                                    <link>tweetarchive-db:db</link>
+                                </links>
+                                <volumes>
+                                    <bind>
+                                        <volume>${basedir}/var/index/prod:/maven/index</volume>
+                                    </bind>
+                                </volumes>
+                                <ports>
+                                    <port>8980:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
         </plugins>
     </build>
