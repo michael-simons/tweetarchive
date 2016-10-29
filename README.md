@@ -65,7 +65,7 @@ This will create one Docker image based on the official Java image, containing t
 After the above step, run
 
 ```
-./mvnw docker:run
+./mvnw docker:start
 ```
 
 It will start a PostgresSQL container and this apps container. The database files will be stored inside `./var/db/prod` and the Lucene search index at `./var/index/prod` so that those data won't vanish if you stop and restart the container.
