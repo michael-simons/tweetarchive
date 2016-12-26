@@ -18,7 +18,13 @@ There's a lengthy blog post on why and how this application was written:
 
 To build this project, you'll need a valid Java 1.8 installation and either a local PostgreSQL database running on localhost:5432 with a schema named `tweetArchive` and user `tweetArchive` with the same password or a Docker installation.
 
-The database can be configured through the means of [Spring Boot](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html).
+To run a PostgreSQL database instance inside a Docker container use
+
+```
+docker run --name tweet-archive-db-dev -e POSTGRES_USER=tweetArchive -e POSTGRESS_PASSWORD=tweetArchive -p 5432:5432 -d postgres
+```
+
+The database connection can be configured through the means of [Spring Boot](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html).
 
 ### Built the application
 
