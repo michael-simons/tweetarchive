@@ -92,7 +92,7 @@ public final class ArchiveHandlingController {
         try (final ZipInputStream archiv = new ZipInputStream(archive.getInputStream())) {
             ZipEntry entry;
             while ((entry = archiv.getNextEntry()) != null) {
-                if (!entry.getName().startsWith("data/js/tweets/")) {
+                if (!entry.getName().startsWith("data/js/tweets/") || entry.isDirectory()) {
                     continue;
                 }
                 log.debug("Reading archive entry {}...", entry.getName());
