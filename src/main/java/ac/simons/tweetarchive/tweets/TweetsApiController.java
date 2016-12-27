@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-public class TweetsApiController {
+public final class TweetsApiController {
     private final TweetRepository tweetRepository;
 
     @GetMapping("/tweets/{tweetId}")
