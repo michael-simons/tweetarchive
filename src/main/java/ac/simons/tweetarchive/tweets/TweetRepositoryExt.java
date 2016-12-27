@@ -43,4 +43,12 @@ public interface TweetRepositoryExt {
      * @return
      */
     List<TweetEntity> searchByQuery(final String query);
+
+    /**
+     * Retrieves the hierarchy of the tweet with the given id.
+     *
+     * @param id The id of the tweet whose hierarchy should be retrieved
+     * @return A list of tweets
+     */
+    List<TweetEntity> getTweetHierarchy(final long id);
 }

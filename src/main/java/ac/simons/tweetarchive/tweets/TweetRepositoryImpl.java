@@ -15,12 +15,14 @@
  */
 package ac.simons.tweetarchive.tweets;
 
+import static ac.simons.tweetarchive.db.tables.Tweets.TWEETS;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -29,6 +31,13 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.SelectQuery;
+import org.jooq.conf.ParamType;
+import static org.jooq.impl.DSL.field;
+import static org.jooq.impl.DSL.name;
+import static org.jooq.impl.DSL.select;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -43,6 +52,8 @@ public class TweetRepositoryImpl implements TweetRepositoryExt {
     private static final ZoneId UTC = ZoneId.of("UTC");
 
     private final EntityManager entityManager;
+
+    private final DSLContext create;
 
     @Override
     @Transactional(readOnly = true)
@@ -88,5 +99,49 @@ public class TweetRepositoryImpl implements TweetRepositoryExt {
             rv = new ArrayList<>();
         }
         return rv;
+    }
+
+    /**
+     * Creates a query like
+     * <pre>
+     * WITH RECURSIVE cte AS (
+     *      SELECT id, content FROM tweets WHERE id = ?
+     *      UNION ALL
+     *      SELECT t.id, t.content
+     *      FROM cte c
+     *      JOIN tweets t on t.in_reply_to_status_id = c.id
+     * ) SELECT * FROM cte
+     * </pre>
+     *
+     * @param id The id of the tweet starting the hierarchy, i.e. 726762141064286208
+     * @return
+     */
+    @Override
+    public List<TweetEntity> getTweetHierarchy(final long id) {
+        final SelectQuery<Record> sqlGenerator = this.create
+                .withRecursive("cte").as(
+                    select()
+                        .from(TWEETS)
+                        .where(TWEETS.ID.eq(id))
+                   .unionAll(
+                    select()
+                        .from(name("cte"))
+                        .join(TWEETS)
+                            .on(TWEETS.IN_REPLY_TO_STATUS_ID .eq(field(name("cte", "id"), Long.class)))
+                    )
+                )
+                .select()
+                .from(name("cte"))
+                .orderBy(field(name("cte", TWEETS.CREATED_AT.getName())))
+                .getQuery();
+
+        // Retrieve sql with named parameter
+        final String sql = sqlGenerator.getSQL(ParamType.NAMED);
+        // and create actual hibernate query
+        final Query query = this.entityManager.createNativeQuery(sql, TweetEntity.class);
+        // fill in parameter
+        sqlGenerator.getParams().forEach((n, v) -> query.setParameter(n, v.getValue()));
+        // execute query
+        return query.getResultList();
     }
 }
